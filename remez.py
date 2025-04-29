@@ -26,7 +26,7 @@ def get_polynomial_basis(deg):
     return [power(k) for k in range(deg + 1)]
 
 
-def solve(f, a, b, basis, tol=0.01, max_iter=1000):
+def solve(f, a, b, basis, tol=0.01, max_iter=1000, fmax_kwargs=None):
     """Solve the approximation problem:
         max_{a<=x<=b}|f(x)-P(x)| -> min
         P is a combination of basis functions (e.g. monomials)
@@ -34,23 +34,26 @@ def solve(f, a, b, basis, tol=0.01, max_iter=1000):
         f: function to approximate (np.array->np.array)
         a, b: segment of approximation
         basis: list of basis functions (np.array->np.array)
+        fmax_kwargs: kwargs for inner fmax calls (e.g. increase grid size for best accuracy)
     """
     n = len(basis) - 1  # number of alternance points is n+2
     xgrid = np.linspace(a, b, n+2)
     coef = None
+    if fmax_kwargs is None:
+        fmax_kwargs = {}
 
     # Cycle invariant:
     # D >= E_n(f) >= |L|
     L = 0
     it = 0
-    D = fmax(lambda xs: np.abs(f(xs)), a, b)[1]
+    D = fmax(lambda xs: np.abs(f(xs)), a, b, **fmax_kwargs)[1]
     while D - np.abs(L) > tol and it < max_iter:
         it += 1
         L, coef = _alternans(f, xgrid, basis)
         P = linear_combination(coef, basis)
 
         # находим D=max|f-P|
-        (x, D) = fmax(lambda xs: np.abs(f(xs)-P(xs)), a, b)
+        (x, D) = fmax(lambda xs: np.abs(f(xs)-P(xs)), a, b, **fmax_kwargs)
         logging.info("iter: %d", it);
         logging.info("L: %f, D: %f", L, D);
         logging.info("xgrid: %s", xgrid)

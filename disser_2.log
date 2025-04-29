@@ -1,0 +1,23 @@
+/usr/local/lib/python3.10/dist-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+n: 1 r: 10 taus: []
+||xnr|| / ||x0r|| = 0.17238416662365807
+A: 0.5641895835477563
+A r^{-n/2}: 0.1784124116152771
+
+n: 2 r: 10 taus: [0.1473784579285714]
+||xnr|| / ||x0r|| = 0.040735347122563326
+A: 0.42867408225574055
+A r^{-n/2}: 0.042867408225574055
+tau: 0.1473784579285714
+tau * r^{1/2} 0.46605160509758675
+kappas: [0.47693628]
+
+n: 3 r: 10 taus: [0.25053073309183677]
+||xnr|| / ||x0r|| = 0.011716488976617256
+A: 0.39106641913741697
+A r^{-n/2}: 0.012366606008802976
+tau: 0.25053073309183677
+tau * r^{1/2} 0.7922477404419224
+kappas: [0.83255461]
+
