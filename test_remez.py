@@ -9,6 +9,10 @@ from remez import solve, get_polynomial_basis, linear_combination
 
 
 def test_cheb():
+    """
+    Well-known Chebyshev polynomials.
+    Check that the error of the best approximation to x^n equals 2^{1-n}.
+    """
     N = 10
     monomials = get_polynomial_basis(N)
     for n in range(1, N):
@@ -20,6 +24,10 @@ def test_cheb():
 
 
 def test_bernstein():
+    """
+    It is known that lim E_{2n}(|x|)*2n exists; it is known as "Bernstein constaint"
+    and equals approx 0.28
+    """
     bernstein_constant_lo = 0.26
     bernstein_constant_hi = 0.29
     for n in range(5, 10):
